@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Attendance</string>
+    <string name="title_activity_main">Attendance</string>
+    <string-array name="location_list">
+        <item>中高体育館</item>
+        <item>小学校体育館</item>
+    </string-array>
+    <string-array name="Stupid_People">
+        <item>あほ</item>
+        <item>馬鹿</item>
+        <item>間抜け</item>
+        <item>廃人</item>
+        <item>ヒキニート</item>
+    </string-array>
+</resources>

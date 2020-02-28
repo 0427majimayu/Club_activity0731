@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "540740513070",
+    "firebase_url": "https://attendance-936ad.firebaseio.com",
+    "project_id": "attendance-936ad",
+    "storage_bucket": "attendance-936ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540740513070:android:8d2a04559d0ce1e756debf",
+        "android_client_info": {
+          "package_name": "android.lifeistech.com.club_activity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540740513070-h4nn8pe1npmnn61os5ci5qe85e8ohm1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNKzzb4wpAf1Sh7YnX4BF6jPIMXwS0HTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540740513070-h4nn8pe1npmnn61os5ci5qe85e8ohm1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
