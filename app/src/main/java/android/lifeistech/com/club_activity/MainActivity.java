@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         main_listAdapter.notifyDataSetChanged();
 
-        //setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+
                 startActivity(intent);
             }
         });

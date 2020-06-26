@@ -24,7 +24,6 @@ public class Main_listAdapter extends ArrayAdapter<Practice> {
         super(context, resource, objects);
         this.items = objects;
     }
-
    @Override
    public int getCount(){
         return items.size();

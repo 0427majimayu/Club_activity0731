@@ -46,7 +46,7 @@ public class SubmitActivity extends AppCompatActivity {
         adswitch = findViewById(R.id.adswitch);
         nameedit = findViewById(R.id.nameedit);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        
+        DatabaseReference refMsg = database.getReference("Stupid");
 
 
 
@@ -72,13 +72,12 @@ public class SubmitActivity extends AppCompatActivity {
 
         desidebotton.setOnClickListener(V->{
             String nametext = nameedit.getText().toString();
-//            String selectedname = (String)namespinner.getSelectedItem();
-            Stupid_People stupid_people = new Stupid_People(nametext);
+//            String us = (String)namespinner.getSelectedItem();
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            refMsg.push().setValue(stupid_people);
+
         });
 
 

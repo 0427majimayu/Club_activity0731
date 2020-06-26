@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView loactiontext;
     ListView joinlist;
     Button enterbutton;
+    Practice practice;
 
 
     @Override
@@ -39,7 +41,9 @@ public class DetailActivity extends AppCompatActivity {
         joinlist = findViewById(R.id.joinlist);
         enterbutton = findViewById(R.id.enterbutton);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference refMsg = database.getReference("Stupid");
+        DatabaseReference refMsg = database.getReference("practice");
+//        Intent atextintent = getIntent();
+//        datetext.setText(atextintent.getStringExtra("atext"));
 
 
         enterbutton.setOnClickListener(v -> {
@@ -51,7 +55,12 @@ public class DetailActivity extends AppCompatActivity {
         refMsg.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Stupid_People value = dataSnapshot.getValue(Stupid_People.class);
+                practice  = dataSnapshot.getValue(Practice.class);
+                Log.d("tag", practice.getDate());
+                datetext.setText(practice.getDate());
+                timetext.setText(practice.getTime());
+                loactiontext.setText(practice.getLocation());
+
             }
 
             @Override

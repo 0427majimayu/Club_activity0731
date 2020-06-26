@@ -1,10 +1,8 @@
 package android.lifeistech.com.club_activity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -46,8 +44,7 @@ public class AddActivity extends AppCompatActivity {
         makebutton = findViewById(R.id.makebutton);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refMsg = database.getReference("message");
-
-        int ind = addSpinner.getSelectedItemPosition();
+//        int ind = addSpinner.getSelectedItemPosition();
 
 
 
@@ -98,7 +95,6 @@ public class AddActivity extends AppCompatActivity {
 
         makebutton.setOnClickListener(V->{
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-
              String dedit = dateedit.getText().toString();
              String tedit = timeedit.getText().toString();
              String location = (String)addSpinner.getSelectedItem();
