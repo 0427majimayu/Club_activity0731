@@ -46,8 +46,6 @@ public class AddActivity extends AppCompatActivity {
         DatabaseReference refMsg = database.getReference("message");
 //        int ind = addSpinner.getSelectedItemPosition();
 
-
-
         dateedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
