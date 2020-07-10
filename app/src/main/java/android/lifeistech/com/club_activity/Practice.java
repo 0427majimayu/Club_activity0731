@@ -1,6 +1,7 @@
 package android.lifeistech.com.club_activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Practice {
@@ -52,6 +53,7 @@ public class Practice {
         this.location = location;
     }
 
+
     public ArrayList<Attendance> getAttendanceList() {
         return attendanceList;
     }
@@ -60,4 +62,5 @@ public class Practice {
         this.attendanceList = attendanceList;
     }
 }
+
 

@@ -19,9 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// 出欠登録のアクティビティー
 
 public class SubmitActivity extends AppCompatActivity {
     TextView putdateView;
@@ -33,53 +35,109 @@ public class SubmitActivity extends AppCompatActivity {
     EditText nameedit;
 
 
-
+    Practice practice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
-        paswordedit = findViewById(R.id.paswordedit);
         putdateView = findViewById(R.id.putdateView);
+        paswordedit = findViewById(R.id.paswordedit);
 //        namespinner = findViewById(R.id.namespinner);
         desidebotton = findViewById(R.id.desidebotton);
         adswitch = findViewById(R.id.adswitch);
         nameedit = findViewById(R.id.nameedit);
+
+        // for firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference refMsg = database.getReference("Stupid");
+        DatabaseReference refMsg = database.getReference("message");
 
 
 
-
-
+        //出欠について
         adswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean a) {
-
                 if (a) {
                     // true
                     attendance = true;
-
                 } else {
                     // false
                     attendance = false;
-
                 }
             }
         });
 
 //        int subselected = namespinner.getSelectedItemPosition();
-
+        // intentについて
+        // 出欠を登録
         desidebotton.setOnClickListener(V->{
+            // AttendanceListを初期化・取得
+            ArrayList<Attendance> attenList = new ArrayList<Attendance>();
+            attenList = practice.getAttendanceList();
+
+            // Attendanceを作成
             String nametext = nameedit.getText().toString();
+            Attendance attendance = new Attendance(nametext);
+
+            // リストに追加
+            attenList.add(attendance);
+            practice.setAttendanceList(attenList);
+
+            // map作成
+            Map<String, Object> practiceUpdate = new HashMap<>();
+            String childKey = practice.getDate().toString().replaceAll("/", "-");
+            practiceUpdate.put(childKey, practice);
+            refMsg.push();
+            refMsg.setValue(practiceUpdate);
 //            String us = (String)namespinner.getSelectedItem();
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+        });
 
+        // 上の日付表（読み込み）、参加登録（書き込み）
+        // データ読み込み
+        refMsg.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                practice = dataSnapshot.getValue(Practice.class);
+                putdateView.setText(practice.getDate());
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
 
 
+
+//        Practice practice = new Practice();
+//        Practice practice = new Practice("2020-07-22", "15:00", "17:00", "体育館", "パイナップル");
+
+
+
     }
+
 }
+
+
+

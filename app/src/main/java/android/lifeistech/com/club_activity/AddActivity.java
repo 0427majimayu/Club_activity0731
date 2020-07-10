@@ -89,8 +89,8 @@ public class AddActivity extends AppCompatActivity {
                    };
        });
 
-
-
+//練習内容をPracticeに書き込む
+//データの書き込み
         makebutton.setOnClickListener(V->{
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
              String dedit = dateedit.getText().toString();

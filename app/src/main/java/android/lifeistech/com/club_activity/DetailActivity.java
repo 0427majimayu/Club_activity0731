@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView loactiontext;
     ListView joinlist;
     Button enterbutton;
-    Practice practice;
+
 
 
     @Override
@@ -41,7 +41,8 @@ public class DetailActivity extends AppCompatActivity {
         joinlist = findViewById(R.id.joinlist);
         enterbutton = findViewById(R.id.enterbutton);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference refMsg = database.getReference("practice");
+        DatabaseReference refMsg = database.getReference("message");
+
 //        Intent atextintent = getIntent();
 //        datetext.setText(atextintent.getStringExtra("atext"));
 
@@ -51,12 +52,13 @@ public class DetailActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
+//練習日の詳細を表示
+        //データの読み取り
         refMsg.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                practice  = dataSnapshot.getValue(Practice.class);
-                Log.d("tag", practice.getDate());
+                Practice practice  = dataSnapshot.getValue(Practice.class);
+//                Log.d("tag", practice.getDate());
                 datetext.setText(practice.getDate());
                 timetext.setText(practice.getTime());
                 loactiontext.setText(practice.getLocation());
