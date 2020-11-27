@@ -7,29 +7,52 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:background="@drawable/shape_and_color_firstframe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:paddingTop="40dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_gravity="center"
+            android:text="日付新規登録"
+            android:textColor="@android:color/white"
+            android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="日付新規登録"
-                android:textSize="50dp" />
-        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="40dp"
+        android:orientation="vertical"
+        android:paddingBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:text="日付登録"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -40,13 +63,22 @@
                 android:id="@+id/dateedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="日付登録"
+                android:layout_gravity="center|top"
+                android:hint="2020年1月1日"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="true" />
+
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="時間登録"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -57,12 +89,23 @@
                 android:id="@+id/timetext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|top"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="時間登録"
+                android:hint="1:00"
                 android:inputType="textPersonName" />
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/testView6"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="場所選択"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            />
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -71,10 +114,9 @@
 
             <Spinner
                 android:id="@+id/addSpinner"
-                android:layout_width="203dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center|top"
                 android:entries="@array/location_list"
                 android:scrollbarSize="15dp"
                 android:tooltipText="場所登録" />
@@ -88,12 +130,14 @@
 
             <Button
                 android:id="@+id/makebutton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="登録"
-                android:textSize="25dp" />
+                android:textColor="#FFFFFF"
+                android:textSize="25dp"
+                android:background="@drawable/shape_button"/>
         </FrameLayout>
 
     </LinearLayout>

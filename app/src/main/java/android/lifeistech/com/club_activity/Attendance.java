@@ -2,7 +2,7 @@ package android.lifeistech.com.club_activity;
 
 public class Attendance {
     public String name;
-    public boolean atab;
+    public boolean atab = true;
 
     public Attendance(String name) {
         this.name = name;
@@ -23,17 +23,6 @@ public class Attendance {
     public void setName(String name) {
         this.name = name;
     }
-
-    public boolean isAtab() {
-        return atab;
-    }
-
-    public void setAtab(boolean atab) {
-        this.atab = atab;
-    }
-
-
-
 
 
 }

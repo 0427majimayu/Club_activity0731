@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // 出欠登録のアクティビティー
@@ -36,6 +38,7 @@ public class SubmitActivity extends AppCompatActivity {
 
 
     Practice practice;
+    String child_key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,23 +76,30 @@ public class SubmitActivity extends AppCompatActivity {
         // 出欠を登録
         desidebotton.setOnClickListener(V->{
             // AttendanceListを初期化・取得
-            ArrayList<Attendance> attenList = new ArrayList<Attendance>();
-            attenList = practice.getAttendanceList();
+
+            List<Attendance> attendancesList;
+            if (practice.getAttendanceList() != null) {
+                attendancesList = practice.getAttendanceList();
+            } else {
+                attendancesList = new ArrayList<Attendance>();
+            }
+//            attendancesList = practice.getAttendanceList();
 
             // Attendanceを作成
             String nametext = nameedit.getText().toString();
-            Attendance attendance = new Attendance(nametext);
+            Attendance attendance = new Attendance(nametext, true);
 
             // リストに追加
-            attenList.add(attendance);
-            practice.setAttendanceList(attenList);
+            attendancesList.add(attendance);
+            practice.setAttendanceList(attendancesList);
 
             // map作成
+            DatabaseReference practiceRef = refMsg.child(child_key);
             Map<String, Object> practiceUpdate = new HashMap<>();
             String childKey = practice.getDate().toString().replaceAll("/", "-");
-            practiceUpdate.put(childKey, practice);
-            refMsg.push();
-            refMsg.setValue(practiceUpdate);
+            practiceUpdate.put("attendacesList", attendancesList);
+            Log.d("key", child_key);
+            practiceRef.updateChildren(practiceUpdate);
 //            String us = (String)namespinner.getSelectedItem();
 
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
@@ -103,6 +113,7 @@ public class SubmitActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 practice = dataSnapshot.getValue(Practice.class);
+                child_key = dataSnapshot.getKey();
                 putdateView.setText(practice.getDate());
 
             }

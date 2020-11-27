@@ -1,20 +1,17 @@
 package android.lifeistech.com.club_activity;
 
 import android.content.Context;
+import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class Main_listAdapter extends ArrayAdapter<Practice> {
@@ -45,18 +42,39 @@ public class Main_listAdapter extends ArrayAdapter<Practice> {
         }else {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_layout,parent,false);
 
+
             viewHolder = new ViewHolder();
             viewHolder.dateView = (TextView)convertView.findViewById(R.id.dateView);
             viewHolder.timeView = (TextView)convertView.findViewById(R.id.timeView);
             viewHolder.licationView = (TextView)convertView.findViewById(R.id.licationView);
+            viewHolder.imageView  = (ImageView)convertView.findViewById(R.id.imageView);
 
             convertView.setTag(viewHolder);
 
         }
 
-        viewHolder.dateView.setText(item.getDate());
+        String date = item.getDate();
+        if (date.length() > 1) {
+          date = date.substring(7);
+        }
+//        if (date.length() > 1) {
+//            if (date.substring(6, 8).equals("0")){
+//                date = date.substring(7);
+//            } else if (date.substring(6, 8).equals("1")){
+//                date = date.substring(6);
+//            }
+//        }
+
+        viewHolder.dateView.setText(date);
         viewHolder.timeView.setText(item.getTime());
         viewHolder.licationView.setText(item.getLocation());
+
+        Log.d("tag", item.getLocation());
+        if (item.getLocation().equals("小学校体育館")) {
+            viewHolder.imageView.setImageResource(R.drawable.school);
+        } else {
+            viewHolder.imageView.setImageResource(R.drawable.high_school);
+        }
 
         return convertView;
 
@@ -65,6 +83,7 @@ public class Main_listAdapter extends ArrayAdapter<Practice> {
         TextView dateView;
         TextView timeView;
         TextView licationView;
+        ImageView imageView;
     }
 
 }

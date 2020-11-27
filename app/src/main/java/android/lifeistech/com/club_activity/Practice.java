@@ -1,14 +1,15 @@
 package android.lifeistech.com.club_activity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Practice {
+public class Practice implements Serializable {
     public String date;
     public String time;
     public String location;
-    public ArrayList<Attendance> attendanceList;
+    public List<Attendance> attendanceList;
 
     public  Practice(){
     }
@@ -25,8 +26,6 @@ public class Practice {
         this.location = location;
         this.attendanceList = attendanceList;
     }
-
-
 
 
     public String getDate() {
@@ -53,12 +52,11 @@ public class Practice {
         this.location = location;
     }
 
-
-    public ArrayList<Attendance> getAttendanceList() {
+    public List<Attendance> getAttendanceList() {
         return attendanceList;
     }
 
-    public void setAttendanceList(ArrayList<Attendance> attendanceList) {
+    public void setAttendanceList(List<Attendance> attendanceList) {
         this.attendanceList = attendanceList;
     }
 }

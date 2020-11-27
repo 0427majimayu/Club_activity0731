@@ -39,26 +39,39 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Practice> items;
 
 
+    // 練習画面一覧
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Viewとの紐づけ
         listView = findViewById(R.id.listView);
+
+        // Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refMsg = database.getReference("message");
 
+        // ListView
         items = new ArrayList<>();
-
         main_listAdapter = new Main_listAdapter(this, 0, items);
         listView.setAdapter(main_listAdapter);
-
         main_listAdapter.notifyDataSetChanged();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+//                intent.putExtra("date", items.get(i).getDate());
+                intent.putExtra("practice", items.get(i));
+                startActivity(intent);
+            }
+        });
 
 //        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,24 +82,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-
-                startActivity(intent);
-            }
-        });
-
-        //練習日一覧を表示する
         //データの読み取り
         refMsg.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Practice value = dataSnapshot.getValue(Practice.class);
-//                items.add(value);
+                items.add(value);
                 main_listAdapter.add(value);
                 main_listAdapter.notifyDataSetChanged();
+
             }
 
             @Override

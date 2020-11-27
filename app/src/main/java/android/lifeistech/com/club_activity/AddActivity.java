@@ -2,17 +2,21 @@ package android.lifeistech.com.club_activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -30,6 +34,7 @@ public class AddActivity extends AppCompatActivity {
     EditText dateedit;
     Button   makebutton;
     Spinner addSpinner;
+    FrameLayout frameLayout;
 
 
 
@@ -38,13 +43,31 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        //resの取得
+        Resources res = getResources();
+
+        //actionbar
+        findViewById(android.R.id.content).setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        //紐づけ
+
         timeedit = findViewById(R.id.timetext);
         addSpinner = findViewById(R.id.addSpinner);
         dateedit = findViewById(R.id.dateedit);
         makebutton = findViewById(R.id.makebutton);
+        frameLayout = findViewById(R.id.frameLayout);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refMsg = database.getReference("message");
 //        int ind = addSpinner.getSelectedItemPosition();
+
+        //一番上のframelayout
+
+        //Drawable ffshapeandcolor = ResourcesCompat.getDrawable(res, R.drawable.shape_and_color_firstframe, getTheme());
+        //makebutton.setBackground(ffshapeandcolor);
+        //ボタンのlayout
+
+       // Drawable shape = ResourcesCompat.getDrawable(res, R.drawable.shape_button, getTheme());
+       // makebutton.setBackground(shape);
 
         dateedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +81,9 @@ public class AddActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 dateedit.setText(String.format("%d / %02d / %02d", year, month+1, dayOfMonth));
+
+
+
                             }
                         },
                         date.get(Calendar.YEAR),
@@ -89,13 +115,14 @@ public class AddActivity extends AppCompatActivity {
                    };
        });
 
-//練習内容をPracticeに書き込む
-//データの書き込み
+        // 練習内容をPracticeに書き込む
+        // データの書き込み
         makebutton.setOnClickListener(V->{
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-             String dedit = dateedit.getText().toString();
-             String tedit = timeedit.getText().toString();
-             String location = (String)addSpinner.getSelectedItem();
+            String dedit = dateedit.getText().toString();
+            //String[] visibleyear = dedit.split("/",0);
+            String tedit = timeedit.getText().toString();
+            String location = (String)addSpinner.getSelectedItem();
             Practice practice = new Practice(dedit,tedit,location);
             startActivity(intent);
             refMsg.push().setValue(practice);

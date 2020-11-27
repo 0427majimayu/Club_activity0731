@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SubmitActivity"></activity>
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".First_Activity" />
+        <activity android:name=".SubmitActivity" />
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FirebaseUIActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
