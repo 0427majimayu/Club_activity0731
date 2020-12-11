@@ -102,6 +102,7 @@ public class SubmitActivity extends AppCompatActivity {
             attendancesList.add(attendance);
             practice.setAttendanceList(attendancesList);
 
+            
             // map作成
             DatabaseReference practiceRef = refMsg.child(child_key);
             Map<String, Object> practiceUpdate = new HashMap<>();
