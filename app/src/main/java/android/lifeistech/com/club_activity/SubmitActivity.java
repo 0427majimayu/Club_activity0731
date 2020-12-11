@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +31,13 @@ import java.util.Map;
 
 public class SubmitActivity extends AppCompatActivity {
     TextView putdateView;
+    TextView nameText;
     Spinner  namespinner;
     Button   desidebotton;
     Switch   adswitch;
     EditText paswordedit;
     boolean attendance;
-    EditText nameedit;
+
 
 
     Practice practice;
@@ -45,15 +48,22 @@ public class SubmitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
         putdateView = findViewById(R.id.putdateView);
+        nameText = findViewById(R.id.nameText);
         paswordedit = findViewById(R.id.paswordedit);
 //        namespinner = findViewById(R.id.namespinner);
         desidebotton = findViewById(R.id.desidebotton);
         adswitch = findViewById(R.id.adswitch);
-        nameedit = findViewById(R.id.nameedit);
+
 
         // for firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference refMsg = database.getReference("message");
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String nametext = user.getDisplayName();
+        nameText.setText(nametext);
+
+
 
 
 
@@ -86,7 +96,6 @@ public class SubmitActivity extends AppCompatActivity {
 //            attendancesList = practice.getAttendanceList();
 
             // Attendanceを作成
-            String nametext = nameedit.getText().toString();
             Attendance attendance = new Attendance(nametext, true);
 
             // リストに追加
